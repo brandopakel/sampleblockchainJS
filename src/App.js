@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from '@blueprintjs/core';
 import {action} from './store';
 import './App.css';
+import BlockchainWelcome from './sitecomponents/blockchainopening';
 
 class App extends Component {
   state = {
