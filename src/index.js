@@ -1,17 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {action, state} from './store';
+import { subscribe, publish } from './network';
+action({})
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+subscribe('BLOCKCHAIN_BROADCAST', (names) => {
+  action({type: 'BLOCKCHAIN_BROADCAST', names})
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+subscribe('BLOCKCHAIN_BROADCAST_REQUEST', () => {
+  publish('BLOCKCHAIN_BROADCAST', state.blockchains.map((b) => b.name))
+});
+
+publish('BLOCKCHAIN_BROADCAST_REQUEST', {});
